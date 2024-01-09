@@ -1,29 +1,31 @@
+package tiketcenter;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class CreateNewEmployee {
+public class createDataTiket {
 
-    private static final String URL = "jdbc:mysql://localhost:3306/database_pbo_naufaldiraagustian";
+    private static final String URL = "jdbc:mysql://localhost:3306/tiketcenter";
     private static final String USER = "root";
     private static final String PASSWORD = "";
 
     public static void insertEmployeeData() {
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
-            String sql = "INSERT INTO pelanggan (id, Username, Password) VALUES (?, ?, ?)";
+            String sql = "INSERT INTO datatiket (id_tiket, nama_tiket, harga_tiket) VALUES (?, ?, ?)";
             try (PreparedStatement preparedStatement = connection.prepareStatement(sql)) {
-                System.out.println("----MEMBUAT DATA LOGIN BARU----");
+                System.out.println("----MEMBUAT DATA TIKET BARU----");
                 Scanner scanner = new Scanner(System.in);
 
                 System.out.print("Enter value for ID (integer): ");
                 int idValue = scanner.nextInt();
 
-                System.out.print("Enter value for Username: ");
+                System.out.print("Enter value for nama_tiket: ");
                 String usernameValue = scanner.next();
 
-                System.out.print("Enter value for Password: ");
+                System.out.print("Enter value for Harga: ");
                 String passwordValue = scanner.next();
 
                 preparedStatement.setInt(1, idValue);
@@ -33,9 +35,9 @@ public class CreateNewEmployee {
                 int rowsAffected = preparedStatement.executeUpdate();
 
                 if (rowsAffected > 0) {
-                    System.out.println("Berhasil menambah data login baru");
+                    System.out.println("Berhasil menambah data  baru");
                 } else {
-                    System.out.println("Tidak dapat menambah data login baru");
+                    System.out.println("Tidak dapat menambah data  baru");
                 }
 
                 scanner.close();
@@ -45,3 +47,4 @@ public class CreateNewEmployee {
         }
     }
 }
+
